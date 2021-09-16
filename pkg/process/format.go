@@ -7,6 +7,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"time"
 )
 
 //goland:noinspection GoUnusedGlobalVariable
@@ -14,6 +15,31 @@ var FormatMapper = map[string]convertor.Convertor{
 	"$remote_user":  {Run: StringFormat, Name: "user"},
 	"$request_body": {Run: JsonFormat, Name: "body"},
 	"$request_time": {Run: CostFormat, Name: "cost"},
+	"[$time_local]": {Run: DateFormat, Name: "time"},
+}
+
+func DateFormat(s string) interface{} {
+	//fmt.Println(s)
+	s = s[1 : len(s)-1]
+	//s = strings.Replace(s, "2021:", "2021T", 1)
+	//s = strings.Replace(s, " +0800", ".000Z", 1)
+	//s = strings.Replace(s, "/", "-", 2)
+	//s = strings.Trim(s, " ")
+	//fmt.Println(s)
+	//v, err := time.Parse(DateLayout, s)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//fmt.Println(s)
+	y, _ := strconv.Atoi(s[7:11])
+	d, _ := strconv.Atoi(s[0:2])
+	h, _ := strconv.Atoi(s[12:14])
+	m, _ := strconv.Atoi(s[15:17])
+	ss, _ := strconv.Atoi(s[18:20])
+	dt := time.Date(y, time.Month(9), d,
+		h, m, ss, 0, time.UTC)
+	//fmt.Println(dt.Unix())
+	return dt
 }
 
 func StringFormat(s string) interface{} {
