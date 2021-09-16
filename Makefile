@@ -1,19 +1,22 @@
 .PHONY: all
 
 resolve: scripts/deps.sh
-	@sh $<
+	@sh $< $(args)
 
 nggo: cmd/nggo/main/main.go
-	@go run $<
+	@go run $< $(args)
 
 head: cmd/nggo/head/head.go
-	@go run $<
+	@go run $< $(args)
 
 tst: cmd/nggo/tst/tst.go
-	@go run $<
+	@go run $< $(args)
 
 format: cmd/nggo/format/format.go
-	@go run $<
+	@go run $< $(args)
 
 decode: cmd/nggo/decode/decode.go
-	@go run $<
+	@go run $< $(args)
+
+sample: cmd/nggo/sample/sample.go
+	@go run $< $(args)
