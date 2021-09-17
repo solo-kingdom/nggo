@@ -19,6 +19,7 @@ var FormatMapper = map[string]convertor.Convertor{
 }
 
 func DateFormat(s string) interface{} {
+	// TODO fix hardcode
 	//fmt.Println(s)
 	s = s[1 : len(s)-1]
 	//s = strings.Replace(s, "2021:", "2021T", 1)
